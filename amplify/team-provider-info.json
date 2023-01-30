@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-osteophill-dev-181628-authRole",
+      "UnauthRoleArn": "arn:aws:iam::740317745905:role/amplify-osteophill-dev-181628-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::740317745905:role/amplify-osteophill-dev-181628-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-osteophill-dev-181628-deployment",
+      "UnauthRoleName": "amplify-osteophill-dev-181628-unauthRole",
+      "StackName": "amplify-osteophill-dev-181628",
+      "StackId": "arn:aws:cloudformation:eu-west-1:740317745905:stack/amplify-osteophill-dev-181628/74d84d80-a0b9-11ed-be07-0659a062efbf",
+      "AmplifyAppId": "d250x6hbbanb7d"
+    },
+    "categories": {
+      "api": {
+        "osteophill": {}
+      },
+      "auth": {
+        "osteophill8f54cd29": {}
+      },
+      "storage": {
+        "osteophill": {}
+      }
+    }
+  }
+}

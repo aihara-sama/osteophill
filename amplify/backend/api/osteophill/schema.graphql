@@ -1,0 +1,5 @@
+type Bone @model {
+	id: ID!
+	name: String!
+	image: String!
+}
