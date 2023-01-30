@@ -11,8 +11,10 @@ export const createBone = /* GraphQL */ `
       id
       name
       image
+      category
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -25,8 +27,10 @@ export const updateBone = /* GraphQL */ `
       id
       name
       image
+      category
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -39,8 +43,10 @@ export const deleteBone = /* GraphQL */ `
       id
       name
       image
+      category
       createdAt
       updatedAt
+      owner
     }
   }
 `;

@@ -1,22 +1,14 @@
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Box, Button, Hidden, IconButton } from "@mui/material";
+import { Box, Hidden, IconButton } from "@mui/material";
 import { LanguageToggle } from "components/common/LanguageToggle";
 import { Logo } from "components/common/Logo";
 import MobileNavbarDrawer from "components/common/MobileNavbarDrawer";
 import { ThemeToggle } from "components/common/ThemeToggle";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authSlice } from "slices/auth.slice";
-import type { RootState } from "store";
 
-export const Header = () => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation("common");
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-
+export const UserHeader = () => {
   const [isMobileNavbarDrawerOpen, setIsMobileNavbarDrawerOpen] =
     useState<boolean>(false);
 
@@ -44,19 +36,6 @@ export const Header = () => {
       <Box>
         <LanguageToggle />
         <ThemeToggle />
-        {isAuthenticated ? (
-          <Button
-            variant="text"
-            onClick={() => dispatch(authSlice.actions.logout())}
-          >
-            {t("Logout")}
-          </Button>
-        ) : (
-          <Button variant="text" component={Link} href="/login">
-            {t("Login")}
-          </Button>
-        )}
-
         <Hidden smUp>
           <IconButton
             sx={{ px: 0 }}

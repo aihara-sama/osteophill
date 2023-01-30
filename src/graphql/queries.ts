@@ -8,8 +8,10 @@ export const getBone = /* GraphQL */ `
       id
       name
       image
+      category
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -24,8 +26,10 @@ export const listBones = /* GraphQL */ `
         id
         name
         image
+        category
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

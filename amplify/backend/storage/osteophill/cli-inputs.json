@@ -3,14 +3,7 @@
   "policyUUID": "4dd55fc0",
   "bucketName": "osteophill",
   "storageAccess": "authAndGuest",
-  "guestAccess": [
-    "READ"
-  ],
-  "authAccess": [
-    "CREATE_AND_UPDATE",
-    "READ",
-    "DELETE"
-  ],
-  "triggerFunction": "NONE",
+  "guestAccess": ["READ"],
+  "authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
   "groupAccess": {}
 }

@@ -1,3 +1,4 @@
+import { Authenticator } from "@aws-amplify/ui-react";
 import type { EmotionCache } from "@emotion/react";
 import { CacheProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,15 +7,21 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { Meta } from "components/common/Meta";
 import { Toaster } from "components/common/Toaster";
 import { ThemeProvider } from "contexts/theme";
+import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Router } from "next/router";
-import { appWithTranslation } from "next-i18next";
 import nProgress from "nprogress";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "store";
 import createEmotionCache from "utils/createEmotionCache";
+
+import { Amplify } from "aws-amplify";
+
+import awsConfigs from "../aws-exports";
+
+Amplify.configure(awsConfigs);
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -42,9 +49,11 @@ function MyApp(props: MyAppProps) {
           {() => (
             <ThemeProvider>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <CssBaseline />
-                <Toaster />
-                <Component {...pageProps} />
+                <Authenticator.Provider>
+                  <CssBaseline />
+                  <Toaster />
+                  <Component {...pageProps} />
+                </Authenticator.Provider>
               </LocalizationProvider>
             </ThemeProvider>
           )}

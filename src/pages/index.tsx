@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import { Layout } from "components/layouts/Layout";
+import { UserLayout } from "components/layouts/UserLayout";
 import type { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { OrganizationJsonLd } from "next-seo";
 
 const Index = () => {
   return (
-    <Layout>
+    <UserLayout>
       <OrganizationJsonLd
         type="Corporation"
         id="https://example.com"
@@ -40,7 +40,7 @@ const Index = () => {
           height: "100%",
         }}
       ></Box>
-    </Layout>
+    </UserLayout>
   );
 };
 

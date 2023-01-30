@@ -1,5 +1,9 @@
 {
   "AppSyncApiName": "osteophill",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": ["authosteophill8f54cd29", "Outputs.UserPoolId"]
+  },
+  "AuthModeLastUpdated": "2023-01-30T22:09:33.867Z"
 }

@@ -8,7 +8,7 @@ export default function getErrorProps(
       helperText:
         formik.touched[name] && formik.errors[name]
           ? (formik.errors[name] as string)
-          : " ",
+          : "",
     };
   }
   return {};

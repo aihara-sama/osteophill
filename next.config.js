@@ -9,4 +9,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   i18n,
+  env: {
+    AWS_BUCKET: process.env.AWS_BUCKET,
+  },
 });

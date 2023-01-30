@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import AuthGuard from "components/auth/AuthGuard";
-import { Layout } from "components/layouts/Layout";
+import { UserLayout } from "components/layouts/UserLayout";
 import type { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Profile = () => {
   return (
     <AuthGuard>
-      <Layout>
+      <UserLayout>
         <Box
           sx={{
             display: "flex",
@@ -18,7 +18,7 @@ const Profile = () => {
         >
           <Typography variant="h2">Profile</Typography>
         </Box>
-      </Layout>
+      </UserLayout>
     </AuthGuard>
   );
 };

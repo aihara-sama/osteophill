@@ -1,11 +1,3 @@
-import type { AxiosResponse } from "axios";
-
-export type ApiResponse<T = never> = AxiosResponse<{
-  message: string;
-  status: "success" | "failed";
-  data: T;
-}>;
-
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
@@ -20,6 +12,7 @@ export type CreateBoneInput = {
 export type ModelBoneConditionInput = {
   name?: ModelStringInput | null;
   image?: ModelStringInput | null;
+  category?: ModelStringInput | null;
   and?: Array<ModelBoneConditionInput | null> | null;
   or?: Array<ModelBoneConditionInput | null> | null;
   not?: ModelBoneConditionInput | null;
@@ -69,8 +62,10 @@ export type Bone = {
   id: string;
   name: string;
   image: string;
+  category: string;
   createdAt: string;
   updatedAt: string;
+  owner?: string | null;
 };
 
 export type UpdateBoneInput = {
@@ -169,6 +164,7 @@ export type CreateBoneMutation = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
@@ -186,6 +182,7 @@ export type UpdateBoneMutation = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
@@ -203,6 +200,7 @@ export type DeleteBoneMutation = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
@@ -219,6 +217,7 @@ export type GetBoneQuery = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
@@ -239,6 +238,7 @@ export type ListBonesQuery = {
       category: string;
       createdAt: string;
       updatedAt: string;
+      owner?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -246,6 +246,7 @@ export type ListBonesQuery = {
 
 export type OnCreateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnCreateBoneSubscription = {
@@ -257,11 +258,13 @@ export type OnCreateBoneSubscription = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
 export type OnUpdateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnUpdateBoneSubscription = {
@@ -273,11 +276,13 @@ export type OnUpdateBoneSubscription = {
     category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };
 
 export type OnDeleteBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnDeleteBoneSubscription = {
@@ -285,9 +290,10 @@ export type OnDeleteBoneSubscription = {
     __typename: "Bone";
     id: string;
     name: string;
-    category: string;
     image: string;
+    category: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string | null;
   } | null;
 };

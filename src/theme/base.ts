@@ -109,6 +109,13 @@ const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiFormHelperText: {
+    styleOverrides: {
+      root: {
+        marginLeft: 0,
+      },
+    },
+  },
 };
 
 const breakpoints: ThemeOptions["breakpoints"] = {
