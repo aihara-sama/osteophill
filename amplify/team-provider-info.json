@@ -20,6 +20,12 @@
       },
       "storage": {
         "osteophill": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d250x6hbbanb7d",
+          "type": "cicd"
+        }
       }
     }
   }
