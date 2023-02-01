@@ -1,16 +1,23 @@
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Box, Hidden, IconButton } from "@mui/material";
+import { Box, Hidden, IconButton, Link as MuiLink } from "@mui/material";
 import { LanguageToggle } from "components/common/LanguageToggle";
 import { Logo } from "components/common/Logo";
 import MobileNavbarDrawer from "components/common/MobileNavbarDrawer";
 import { ThemeToggle } from "components/common/ThemeToggle";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { kebabCaseToCapitalize } from "utils/kebab-case-to-capitalize";
+import { menu } from "./menu";
 
 export const UserHeader = () => {
   const [isMobileNavbarDrawerOpen, setIsMobileNavbarDrawerOpen] =
     useState<boolean>(false);
+
+  const { query } = useRouter();
+
+  console.log({ query });
 
   return (
     <Box
@@ -33,6 +40,27 @@ export const UserHeader = () => {
       <Link href="/">
         <Logo />
       </Link>
+      <Hidden smDown>
+        <Box display={"flex"} gap={3}>
+          {menu.map(({ title, href }, idx) => (
+            <MuiLink
+              color={"text.primary"}
+              href={href}
+              component={Link}
+              underline="none"
+              key={idx}
+              fontWeight={
+                kebabCaseToCapitalize(query.body_part as string) === title
+                  ? "bold"
+                  : 400
+              }
+            >
+              {title}
+            </MuiLink>
+          ))}
+        </Box>
+      </Hidden>
+
       <Box>
         <LanguageToggle />
         <ThemeToggle />

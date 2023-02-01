@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { UserLayout } from "components/layouts/UserLayout";
 import { FunctionComponent } from "react";
 
 interface IProps {}
@@ -16,7 +16,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
 
   // ~~~~~ Handlers ~~~~~
 
-  return <Box></Box>;
+  return <UserLayout></UserLayout>;
 };
 
 export default BodyPart;

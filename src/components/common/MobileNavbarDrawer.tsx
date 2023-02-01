@@ -1,9 +1,10 @@
 import Close from "@mui/icons-material/Close";
-import { Box, Drawer, Hidden } from "@mui/material";
+import { Box, Drawer, Hidden, Link as MuiLink } from "@mui/material";
+import { menu } from "components/layouts/UserHeader/menu";
 import Link from "next/link";
-import type { FunctionComponent } from "react";
-import React from "react";
-
+import { useRouter } from "next/router";
+import React, { FunctionComponent, useEffect } from "react";
+import { kebabCaseToCapitalize } from "utils/kebab-case-to-capitalize";
 import { Logo } from "./Logo";
 
 interface IProps {
@@ -18,17 +19,20 @@ const MobileNavbarDrawer: FunctionComponent<IProps> = ({
   // ~~~~~ Redux state ~~~~~
 
   // ~~~~~ Hooks ~~~~~
+  const { query } = useRouter();
 
   // ~~~~~ Cmp state ~~~~~
 
   // ~~~~~ Refs ~~~~~
 
-  // ~~~~~ Effects ~~~~~
-
   // ~~~~~ Handlers ~~~~~
   const handleClose = () => {
     setIsDrawer(false);
   };
+
+  // ~~~~~ Effects ~~~~~
+  useEffect(handleClose, [query]);
+
   return (
     <Hidden mdUp>
       <Drawer
@@ -55,6 +59,24 @@ const MobileNavbarDrawer: FunctionComponent<IProps> = ({
           <Box display="flex" justifyContent="end">
             <Close sx={{ cursor: "pointer" }} onClick={handleClose} />
           </Box>
+        </Box>
+        <Box display={"flex"} gap={3} flexDirection="column">
+          {menu.map(({ title, href }, idx) => (
+            <MuiLink
+              color={"text.primary"}
+              href={href}
+              component={Link}
+              underline="none"
+              key={idx}
+              fontWeight={
+                kebabCaseToCapitalize(query.body_part as string) === title
+                  ? "bold"
+                  : 400
+              }
+            >
+              {title}
+            </MuiLink>
+          ))}
         </Box>
       </Drawer>
     </Hidden>

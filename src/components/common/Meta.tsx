@@ -1,6 +1,6 @@
+import { NextSeo } from "next-seo";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
 
 interface Detail {
   url: string;
@@ -13,7 +13,7 @@ interface Detail {
 const data: Detail[] = [
   {
     url: "/",
-    title: "example",
+    title: "Osteophill",
     description: "Next.js + MUI + Typescript boilerplate",
     keywords: "nextjs, material-ui, typescript, boilerplate",
   },
@@ -45,7 +45,7 @@ export const Meta = () => {
           description: details.description,
           url: details.canonical,
           locale: "en",
-          site_name: "example",
+          site_name: "osteophill",
         }}
       />
     </Head>

@@ -40,7 +40,7 @@ function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>example</title>
+        <title>Osteophill</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Meta />

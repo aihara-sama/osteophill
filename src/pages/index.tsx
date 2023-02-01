@@ -9,10 +9,10 @@ const Index = () => {
     <UserLayout>
       <OrganizationJsonLd
         type="Corporation"
-        id="https://example.com"
-        logo="https://example.com/static/media/logo.59447da9.png"
-        legalName="example Private Limited"
-        name="example"
+        id="https://osteophill.com"
+        logo="https://osteophill.com/static/media/logo.59447da9.png"
+        legalName="Osteophill Private Limited"
+        name="osteophill"
         address={{
           streetAddress: "Plot no 8, Parmanand Colony, Block B, Sector 12",
           addressLocality: "Dwarka",
@@ -24,13 +24,13 @@ const Index = () => {
           {
             telephone: "+37369763951",
             contactType: "query",
-            email: "john@example.com",
+            email: "john@osteophill.com",
             areaServed: "MD",
             availableLanguage: ["English"],
           },
         ]}
-        sameAs={["https://example.com"]}
-        url="https://example.com"
+        sameAs={["https://osteophill.com"]}
+        url="https://osteophill.com"
       />
       <Box
         sx={{
