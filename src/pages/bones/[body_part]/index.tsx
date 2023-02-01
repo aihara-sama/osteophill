@@ -54,6 +54,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
         setBones(result.data.listBones.items);
       } catch (error) {
         toast.error("Something went wrong!");
+        console.error(error);
       } finally {
         setIsBonesLoading(false);
       }
