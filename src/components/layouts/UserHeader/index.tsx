@@ -17,8 +17,6 @@ export const UserHeader = () => {
 
   const { query } = useRouter();
 
-  console.log({ query });
-
   return (
     <Box
       component="header"

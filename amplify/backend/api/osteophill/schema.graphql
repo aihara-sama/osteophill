@@ -1,6 +1,7 @@
-type Bone @model @auth(rules: [{ allow: owner }]) {
+type Bone @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String!
   image: String!
   category: String!
-}
+  bodyPart: String!
+} 

@@ -93,6 +93,16 @@ const components: ThemeOptions["components"] = {
       disableTouchRipple: true,
     },
   },
+  MuiTextField: {
+    defaultProps: {
+      size: "small",
+    },
+  },
+  MuiSelect: {
+    defaultProps: {
+      size: "small",
+    },
+  },
   MuiTypography: {
     defaultProps: {
       variantMapping: {

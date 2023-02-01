@@ -1,6 +1,5 @@
 import { Box, Container } from "@mui/material";
 import type { FC, PropsWithChildren } from "react";
-
 import { UserHeader } from "./UserHeader";
 
 export const UserLayout: FC<PropsWithChildren> = ({ children }) => {

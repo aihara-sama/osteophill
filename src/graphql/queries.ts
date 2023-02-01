@@ -9,6 +9,7 @@ export const getBone = /* GraphQL */ `
       name
       image
       category
+      bodyPart
       createdAt
       updatedAt
       owner
@@ -27,6 +28,7 @@ export const listBones = /* GraphQL */ `
         name
         image
         category
+        bodyPart
         createdAt
         updatedAt
         owner

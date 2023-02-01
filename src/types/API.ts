@@ -15,11 +15,13 @@ export type CreateBoneInput = {
   name: string;
   image: string;
   category: string;
+  bodyPart: string;
 };
 
 export type ModelBoneConditionInput = {
   name?: ModelStringInput | null;
   image?: ModelStringInput | null;
+  bodyPart?: ModelStringInput | null;
   and?: Array<ModelBoneConditionInput | null> | null;
   or?: Array<ModelBoneConditionInput | null> | null;
   not?: ModelBoneConditionInput | null;
@@ -69,6 +71,7 @@ export type Bone = {
   id: string;
   name: string;
   image: string;
+  bodyPart: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -77,6 +80,7 @@ export type UpdateBoneInput = {
   id: string;
   name?: string | null;
   image?: string | null;
+  bodyPart?: string | null;
   category?: string | null;
 };
 
@@ -88,6 +92,7 @@ export type ModelBoneFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
   image?: ModelStringInput | null;
+  bodyPart?: ModelStringInput | null;
   category?: ModelStringInput | null;
   and?: Array<ModelBoneFilterInput | null> | null;
   or?: Array<ModelBoneFilterInput | null> | null;
@@ -166,6 +171,7 @@ export type CreateBoneMutation = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;
@@ -183,6 +189,7 @@ export type UpdateBoneMutation = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;
@@ -200,6 +207,7 @@ export type DeleteBoneMutation = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;
@@ -216,6 +224,7 @@ export type GetBoneQuery = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;
@@ -236,6 +245,7 @@ export type ListBonesQuery = {
       id: string;
       name: string;
       image: string;
+      bodyPart: string;
       category: string;
       createdAt: string;
       updatedAt: string;
@@ -254,6 +264,7 @@ export type OnCreateBoneSubscription = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;
@@ -270,6 +281,7 @@ export type OnUpdateBoneSubscription = {
     id: string;
     name: string;
     image: string;
+    bodyPart: string;
     category: string;
     createdAt: string;
     updatedAt: string;

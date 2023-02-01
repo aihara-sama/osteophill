@@ -17,7 +17,7 @@ import { createBone } from "graphql/mutations";
 import { ChangeEventHandler, FunctionComponent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { CreateBoneInput } from "types/API";
-import { BoneCategory } from "types/bone";
+import { BoneBodyPart, BoneCategory } from "types/bone";
 import getErrorProps from "utils/getErrorProps";
 import * as Yup from "yup";
 
@@ -26,6 +26,7 @@ interface IProps {}
 const initialCreateBoneFormikState = {
   name: "",
   image: "",
+  bodyPart: BoneBodyPart.HEAD,
   category: BoneCategory.FLAT_BONE,
 };
 
@@ -37,6 +38,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Please enter a bone name"),
       category: Yup.string().required("Please select a bone category"),
+      bodyPart: Yup.string().required("Please select a body part"),
       image: Yup.string().required("Please select a bone image"),
     }),
     initialValues: { ...initialCreateBoneFormikState },
@@ -102,11 +104,16 @@ const CreateBone: FunctionComponent<IProps> = () => {
       "category",
       initialCreateBoneFormikState.category
     );
+    createBoneFormik.setFieldValue(
+      "bodyPart",
+      initialCreateBoneFormikState.bodyPart
+    );
     createBoneFormik.setFieldValue("name", initialCreateBoneFormikState.name);
     createBoneFormik.setFieldValue("image", initialCreateBoneFormikState.image);
     createBoneFormik.setFieldTouched("image", false);
     createBoneFormik.setFieldTouched("name", false);
     createBoneFormik.setFieldTouched("category", false);
+    createBoneFormik.setFieldTouched("bodyPart", false);
   };
 
   // ~~~~~~~~~~ Vars ~~~~~~~~~~~
@@ -121,7 +128,6 @@ const CreateBone: FunctionComponent<IProps> = () => {
             {...getErrorProps(createBoneFormik, "name")}
             fullWidth
             label="Bone name"
-            size="small"
             sx={{
               mt: 2,
             }}
@@ -135,9 +141,25 @@ const CreateBone: FunctionComponent<IProps> = () => {
             }}
           />
           <FormControl sx={{ mt: 2 }} fullWidth>
+            <InputLabel>Body part</InputLabel>
+            <Select
+              name="category"
+              value={createBoneFormik.values.bodyPart}
+              label="Body part"
+              onChange={(e) => {
+                createBoneFormik.setFieldValue("bodyPart", e.target.value);
+              }}
+            >
+              {Object.values(BoneBodyPart).map((val, idx) => (
+                <MenuItem value={val} key={idx}>
+                  {val}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl sx={{ mt: 2 }} fullWidth>
             <InputLabel>Bone category</InputLabel>
             <Select
-              size="small"
               name="category"
               value={createBoneFormik.values.category}
               label="Bone category"

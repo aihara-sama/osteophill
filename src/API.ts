@@ -7,12 +7,14 @@ export type CreateBoneInput = {
   name: string;
   image: string;
   category: string;
+  bodyPart: string;
 };
 
 export type ModelBoneConditionInput = {
   name?: ModelStringInput | null;
   image?: ModelStringInput | null;
   category?: ModelStringInput | null;
+  bodyPart?: ModelStringInput | null;
   and?: Array<ModelBoneConditionInput | null> | null;
   or?: Array<ModelBoneConditionInput | null> | null;
   not?: ModelBoneConditionInput | null;
@@ -63,6 +65,7 @@ export type Bone = {
   name: string;
   image: string;
   category: string;
+  bodyPart: string;
   createdAt: string;
   updatedAt: string;
   owner?: string | null;
@@ -73,6 +76,7 @@ export type UpdateBoneInput = {
   name?: string | null;
   image?: string | null;
   category?: string | null;
+  bodyPart?: string | null;
 };
 
 export type DeleteBoneInput = {
@@ -84,6 +88,7 @@ export type ModelBoneFilterInput = {
   name?: ModelStringInput | null;
   image?: ModelStringInput | null;
   category?: ModelStringInput | null;
+  bodyPart?: ModelStringInput | null;
   and?: Array<ModelBoneFilterInput | null> | null;
   or?: Array<ModelBoneFilterInput | null> | null;
   not?: ModelBoneFilterInput | null;
@@ -116,6 +121,7 @@ export type ModelSubscriptionBoneFilterInput = {
   name?: ModelSubscriptionStringInput | null;
   image?: ModelSubscriptionStringInput | null;
   category?: ModelSubscriptionStringInput | null;
+  bodyPart?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionBoneFilterInput | null> | null;
   or?: Array<ModelSubscriptionBoneFilterInput | null> | null;
 };
@@ -162,6 +168,7 @@ export type CreateBoneMutation = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -180,6 +187,7 @@ export type UpdateBoneMutation = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -198,6 +206,7 @@ export type DeleteBoneMutation = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -215,6 +224,7 @@ export type GetBoneQuery = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -236,6 +246,7 @@ export type ListBonesQuery = {
       name: string;
       image: string;
       category: string;
+      bodyPart: string;
       createdAt: string;
       updatedAt: string;
       owner?: string | null;
@@ -256,6 +267,7 @@ export type OnCreateBoneSubscription = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -274,6 +286,7 @@ export type OnUpdateBoneSubscription = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -292,6 +305,7 @@ export type OnDeleteBoneSubscription = {
     name: string;
     image: string;
     category: string;
+    bodyPart: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;

@@ -7,7 +7,15 @@
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authosteophill8f54cd29"
     },
-    "conflictResolution": {},
-    "additionalAuthTypes": []
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "NONE"
+      }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }

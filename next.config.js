@@ -12,4 +12,12 @@ module.exports = withBundleAnalyzer({
   env: {
     AWS_BUCKET: process.env.AWS_BUCKET,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: process.env.AWS_BUCKET.substring(8),
+      },
+    ],
+  },
 });

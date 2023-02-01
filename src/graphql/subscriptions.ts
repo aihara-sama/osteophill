@@ -12,6 +12,7 @@ export const onCreateBone = /* GraphQL */ `
       name
       image
       category
+      bodyPart
       createdAt
       updatedAt
       owner
@@ -28,6 +29,7 @@ export const onUpdateBone = /* GraphQL */ `
       name
       image
       category
+      bodyPart
       createdAt
       updatedAt
       owner
@@ -44,6 +46,7 @@ export const onDeleteBone = /* GraphQL */ `
       name
       image
       category
+      bodyPart
       createdAt
       updatedAt
       owner
