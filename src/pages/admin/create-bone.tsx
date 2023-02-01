@@ -86,7 +86,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
             const { key } = await Storage.put(file.name, file);
             createBoneFormik.setFieldValue(
               "image",
-              `${process.env.AWS_BUCKET}/public/${key}`
+              `${process.env.BUCKET}/public/${key}`
             );
           } catch (error: any) {
             toast.error(error.toString());

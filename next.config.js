@@ -10,13 +10,13 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   i18n,
   env: {
-    AWS_BUCKET: process.env.AWS_BUCKET,
+    BUCKET: process.env.BUCKET,
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: process.env.AWS_BUCKET.substring(8),
+        hostname: process.env.BUCKET.substring(8),
       },
     ],
   },
