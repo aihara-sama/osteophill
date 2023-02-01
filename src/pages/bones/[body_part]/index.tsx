@@ -22,7 +22,6 @@ const BodyPart: FunctionComponent<IProps> = () => {
   // ~~~~~ Cmp state ~~~~~
   const { query } = useRouter();
   const [bones, setBones] = useState<IBone[]>([]);
-  console.log({ bones });
 
   const [searchText, setSearchText] = useState("");
   const [isBonesLoading, setIsBonesLoading] = useState(false);
@@ -124,6 +123,11 @@ const BodyPart: FunctionComponent<IProps> = () => {
             </MuiLink>
           ))}
         </Box>
+      )}
+      {!bones.length && !isBonesLoading && (
+        <Typography color="text.secondary" variant="h3">
+          No data
+        </Typography>
       )}
     </UserLayout>
   );

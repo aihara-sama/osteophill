@@ -1,3 +1,6 @@
+import "@/node_modules/swiper/modules/pagination/pagination.scss";
+import "@/node_modules/swiper/swiper-bundle.min.css";
+import "@/node_modules/swiper/swiper.min.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import type { EmotionCache } from "@emotion/react";
 import { CacheProvider } from "@emotion/react";
