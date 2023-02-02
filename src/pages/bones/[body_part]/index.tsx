@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from "@aws-amplify/api";
+import { API } from "@aws-amplify/api";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Box, Link as MuiLink, TextField, Typography } from "@mui/material";
 import LoadingSpinner from "components/common/LoadingSpinner";
@@ -42,14 +42,14 @@ const BodyPart: FunctionComponent<IProps> = () => {
     (async () => {
       setIsBonesLoading(true);
       try {
-        const result = (await API.graphql(
-          graphqlOperation(listBones, {
-            filter: {
-              bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
-              name: { contains: name },
-            },
-          })
-        )) as { data: { listBones: { items: IBone[] } } };
+        const result = (await API.graphql({
+          query: listBones,
+          variables: {
+            bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
+            name: { contains: name },
+          },
+          authMode: "AWS_IAM",
+        })) as { data: { listBones: { items: IBone[] } } };
 
         setBones(result.data.listBones.items);
       } catch (error) {

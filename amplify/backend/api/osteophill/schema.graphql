@@ -1,7 +1,14 @@
-type Bone @model @auth(rules: [{allow: owner}]) {
+type Bone
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, provider: iam, operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String!
   image: String!
   category: String!
   bodyPart: String!
-} 
+}

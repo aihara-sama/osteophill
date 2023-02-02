@@ -3,6 +3,7 @@ export type AmplifyDependentResourcesAttributes = {
     osteophill: {
       GraphQLAPIEndpointOutput: "string";
       GraphQLAPIIdOutput: "string";
+      GraphQLAPIKeyOutput: "string";
     };
   };
   auth: {

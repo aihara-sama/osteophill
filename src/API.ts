@@ -257,7 +257,6 @@ export type ListBonesQuery = {
 
 export type OnCreateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
-  owner?: string | null;
 };
 
 export type OnCreateBoneSubscription = {
@@ -276,7 +275,6 @@ export type OnCreateBoneSubscription = {
 
 export type OnUpdateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
-  owner?: string | null;
 };
 
 export type OnUpdateBoneSubscription = {
@@ -295,7 +293,6 @@ export type OnUpdateBoneSubscription = {
 
 export type OnDeleteBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
-  owner?: string | null;
 };
 
 export type OnDeleteBoneSubscription = {
