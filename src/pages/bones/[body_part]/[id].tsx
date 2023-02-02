@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import BonesSwiper from "components/common/BonesSwiper";
 import LoadingSpinner from "components/common/LoadingSpinner";
 import { UserLayout } from "components/layouts/UserLayout";
@@ -39,14 +39,17 @@ const Bone: FunctionComponent<IProps> = () => {
     (async () => {
       setIsBoneLoading(true);
       try {
-        const result = (await API.graphql(
-          graphqlOperation(getBone, {
+        const result = (await API.graphql({
+          query: getBone,
+          variables: {
             id: router.query.id,
-          })
-        )) as { data: { getBone: IBone } };
+          },
+          authMode: "AWS_IAM",
+        })) as { data: { getBone: IBone } };
         setBone(result.data.getBone);
       } catch (error) {
         toast.error("Something went wrong!");
+        console.error(error);
       } finally {
         setIsBoneLoading(false);
       }
@@ -56,16 +59,19 @@ const Bone: FunctionComponent<IProps> = () => {
   const handleGetSimilarBones = () => {
     (async () => {
       try {
-        const result = (await API.graphql(
-          graphqlOperation(listBones, {
+        const result = (await API.graphql({
+          query: listBones,
+          variables: {
             filter: {
               bodyPart: {
                 eq: kebabCaseToCapitalize(router.query.body_part as string),
               },
               id: { ne: router.query.id },
             },
-          })
-        )) as { data: { listBones: { items: IBone[] } } };
+          },
+          authMode: "AWS_IAM",
+        })) as { data: { listBones: { items: IBone[] } } };
+
         setsimilarBones(result.data.listBones.items);
       } catch (error) {
         toast.error("Something went wrong!");
