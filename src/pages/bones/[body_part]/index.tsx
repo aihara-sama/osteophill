@@ -1,6 +1,14 @@
 import { API } from "@aws-amplify/api";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Box, Link as MuiLink, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Link as MuiLink,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import LoadingSpinner from "components/common/LoadingSpinner";
 import { UserLayout } from "components/layouts/UserLayout";
 import { listBones } from "graphql/queries";
@@ -18,6 +26,8 @@ const BodyPart: FunctionComponent<IProps> = () => {
   // ~~~~~ Redux state ~~~~~
 
   // ~~~~~ Hooks ~~~~~
+  const theme = useTheme();
+  const isSmallDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   // ~~~~~ Cmp state ~~~~~
   const { query } = useRouter();
@@ -45,8 +55,10 @@ const BodyPart: FunctionComponent<IProps> = () => {
         const result = (await API.graphql({
           query: listBones,
           variables: {
-            bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
-            name: { contains: name },
+            filter: {
+              bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
+              name: { contains: name },
+            },
           },
           authMode: "AWS_IAM",
         })) as { data: { listBones: { items: IBone[] } } };
@@ -69,7 +81,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
         </Typography>
       </Box>
 
-      <Box mt={5} maxWidth={300}>
+      <Box mt={5} maxWidth={isSmallDown ? "100%" : 300}>
         <TextField
           fullWidth
           placeholder="Search bones..."
@@ -84,46 +96,44 @@ const BodyPart: FunctionComponent<IProps> = () => {
       </Box>
       {isBonesLoading && <LoadingSpinner />}
       {!isBonesLoading && (
-        <Box mt={3} display="flex" gap={2}>
+        <Grid mt={3} container spacing={2}>
           {bones.map((bone, idx) => (
-            <MuiLink
-              component={Link}
-              key={idx}
-              href={`/bones/${query.body_part}/${bone.id}`}
-              underline="none"
-              color={"text.secondary"}
-              title={bone.name}
-            >
-              <Box
-                sx={{
-                  border: (theme) => `1px solid ${theme.palette.divider}`,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-around",
-                  py: 1,
-                  width: 150,
-                  height: 150,
-                  borderRadius: 4,
-                }}
+            <Grid key={idx} item xs={12} sm={6} md={3} lg={2} xl={2}>
+              <MuiLink
+                component={Link}
+                href={`/bones/${query.body_part}/${bone.id}`}
+                underline="none"
+                color={"text.secondary"}
+                title={bone.name}
               >
-                <Typography
-                  textAlign={"center"}
-                  sx={{ textDecoration: "none" }}
+                <Box
+                  sx={{
+                    border: (theme) => `1px solid ${theme.palette.divider}`,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    py: 1,
+                    borderRadius: 4,
+                  }}
                 >
-                  {bone.name.substring(0, 10)}
-                  {bone.name.length >= 10 && "..."}
-                </Typography>
-                <Image
-                  width={84}
-                  height={84}
-                  src={bone.image}
-                  alt={bone.name}
-                />
-              </Box>
-            </MuiLink>
+                  <Typography
+                    textAlign={"center"}
+                    sx={{ textDecoration: "none" }}
+                  >
+                    {bone.name}
+                  </Typography>
+                  <Image
+                    width={84}
+                    height={84}
+                    src={bone.image}
+                    alt={bone.name}
+                  />
+                </Box>
+              </MuiLink>
+            </Grid>
           ))}
-        </Box>
+        </Grid>
       )}
       {!bones.length && !isBonesLoading && (
         <Typography color="text.secondary" variant="h3">
