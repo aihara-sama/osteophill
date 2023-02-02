@@ -1,5 +1,6 @@
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import { Box, Container } from "@mui/material";
+import LoadingSpinner from "components/common/LoadingSpinner";
 import { useRouter } from "next/router";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { AdminHeader } from "./AdminHeader";
@@ -15,7 +16,7 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [route]);
 
-  return (
+  return route === "authenticated" ? (
     <Authenticator.Provider>
       <Box component="main" height="100%">
         <AdminHeader />
@@ -24,5 +25,7 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
         </Container>
       </Box>
     </Authenticator.Provider>
+  ) : (
+    <LoadingSpinner />
   );
 };

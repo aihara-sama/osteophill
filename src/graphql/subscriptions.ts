@@ -3,8 +3,11 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBone = /* GraphQL */ `
-  subscription OnCreateBone($filter: ModelSubscriptionBoneFilterInput) {
-    onCreateBone(filter: $filter) {
+  subscription OnCreateBone(
+    $filter: ModelSubscriptionBoneFilterInput
+    $owner: String
+  ) {
+    onCreateBone(filter: $filter, owner: $owner) {
       id
       name
       image
@@ -17,8 +20,11 @@ export const onCreateBone = /* GraphQL */ `
   }
 `;
 export const onUpdateBone = /* GraphQL */ `
-  subscription OnUpdateBone($filter: ModelSubscriptionBoneFilterInput) {
-    onUpdateBone(filter: $filter) {
+  subscription OnUpdateBone(
+    $filter: ModelSubscriptionBoneFilterInput
+    $owner: String
+  ) {
+    onUpdateBone(filter: $filter, owner: $owner) {
       id
       name
       image
@@ -31,8 +37,11 @@ export const onUpdateBone = /* GraphQL */ `
   }
 `;
 export const onDeleteBone = /* GraphQL */ `
-  subscription OnDeleteBone($filter: ModelSubscriptionBoneFilterInput) {
-    onDeleteBone(filter: $filter) {
+  subscription OnDeleteBone(
+    $filter: ModelSubscriptionBoneFilterInput
+    $owner: String
+  ) {
+    onDeleteBone(filter: $filter, owner: $owner) {
       id
       name
       image

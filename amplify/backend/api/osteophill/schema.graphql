@@ -1,11 +1,7 @@
 type Bone
   @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: public, provider: iam, operations: [read] }
-    ]
-  ) {
+  @searchable
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
   id: ID!
   name: String!
   image: String!

@@ -116,6 +116,131 @@ export type ModelBoneConnection = {
   nextToken?: string | null;
 };
 
+export type SearchableBoneFilterInput = {
+  id?: SearchableIDFilterInput | null;
+  name?: SearchableStringFilterInput | null;
+  image?: SearchableStringFilterInput | null;
+  category?: SearchableStringFilterInput | null;
+  bodyPart?: SearchableStringFilterInput | null;
+  createdAt?: SearchableStringFilterInput | null;
+  updatedAt?: SearchableStringFilterInput | null;
+  and?: Array<SearchableBoneFilterInput | null> | null;
+  or?: Array<SearchableBoneFilterInput | null> | null;
+  not?: SearchableBoneFilterInput | null;
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null;
+  gt?: string | null;
+  lt?: string | null;
+  gte?: string | null;
+  lte?: string | null;
+  eq?: string | null;
+  match?: string | null;
+  matchPhrase?: string | null;
+  matchPhrasePrefix?: string | null;
+  multiMatch?: string | null;
+  exists?: boolean | null;
+  wildcard?: string | null;
+  regexp?: string | null;
+  range?: Array<string | null> | null;
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null;
+  gt?: string | null;
+  lt?: string | null;
+  gte?: string | null;
+  lte?: string | null;
+  eq?: string | null;
+  match?: string | null;
+  matchPhrase?: string | null;
+  matchPhrasePrefix?: string | null;
+  multiMatch?: string | null;
+  exists?: boolean | null;
+  wildcard?: string | null;
+  regexp?: string | null;
+  range?: Array<string | null> | null;
+};
+
+export type SearchableBoneSortInput = {
+  field?: SearchableBoneSortableFields | null;
+  direction?: SearchableSortDirection | null;
+};
+
+export enum SearchableBoneSortableFields {
+  id = "id",
+  name = "name",
+  image = "image",
+  category = "category",
+  bodyPart = "bodyPart",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+export type SearchableBoneAggregationInput = {
+  name: string;
+  type: SearchableAggregateType;
+  field: SearchableBoneAggregateField;
+};
+
+export enum SearchableAggregateType {
+  terms = "terms",
+  avg = "avg",
+  min = "min",
+  max = "max",
+  sum = "sum",
+}
+
+export enum SearchableBoneAggregateField {
+  id = "id",
+  name = "name",
+  image = "image",
+  category = "category",
+  bodyPart = "bodyPart",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+export type SearchableBoneConnection = {
+  __typename: "SearchableBoneConnection";
+  items: Array<Bone | null>;
+  nextToken?: string | null;
+  total?: number | null;
+  aggregateItems: Array<SearchableAggregateResult | null>;
+};
+
+export type SearchableAggregateResult = {
+  __typename: "SearchableAggregateResult";
+  name: string;
+  result?: SearchableAggregateGenericResult | null;
+};
+
+export type SearchableAggregateGenericResult =
+  | SearchableAggregateScalarResult
+  | SearchableAggregateBucketResult;
+
+export type SearchableAggregateScalarResult = {
+  __typename: "SearchableAggregateScalarResult";
+  value: number;
+};
+
+export type SearchableAggregateBucketResult = {
+  __typename: "SearchableAggregateBucketResult";
+  buckets?: Array<SearchableAggregateBucketResultItem | null> | null;
+};
+
+export type SearchableAggregateBucketResultItem = {
+  __typename: "SearchableAggregateBucketResultItem";
+  key: string;
+  doc_count: number;
+};
+
 export type ModelSubscriptionBoneFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
@@ -255,8 +380,57 @@ export type ListBonesQuery = {
   } | null;
 };
 
+export type SearchBonesQueryVariables = {
+  filter?: SearchableBoneFilterInput | null;
+  sort?: Array<SearchableBoneSortInput | null> | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  from?: number | null;
+  aggregates?: Array<SearchableBoneAggregationInput | null> | null;
+};
+
+export type SearchBonesQuery = {
+  searchBones?: {
+    __typename: "SearchableBoneConnection";
+    items: Array<{
+      __typename: "Bone";
+      id: string;
+      name: string;
+      image: string;
+      category: string;
+      bodyPart: string;
+      createdAt: string;
+      updatedAt: string;
+      owner?: string | null;
+    } | null>;
+    nextToken?: string | null;
+    total?: number | null;
+    aggregateItems: Array<{
+      __typename: "SearchableAggregateResult";
+      name: string;
+      result:
+        | (
+            | {
+                __typename: "SearchableAggregateScalarResult";
+                value: number;
+              }
+            | {
+                __typename: "SearchableAggregateBucketResult";
+                buckets?: Array<{
+                  __typename: string;
+                  key: string;
+                  doc_count: number;
+                } | null> | null;
+              }
+          )
+        | null;
+    } | null>;
+  } | null;
+};
+
 export type OnCreateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnCreateBoneSubscription = {
@@ -275,6 +449,7 @@ export type OnCreateBoneSubscription = {
 
 export type OnUpdateBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnUpdateBoneSubscription = {
@@ -293,6 +468,7 @@ export type OnUpdateBoneSubscription = {
 
 export type OnDeleteBoneSubscriptionVariables = {
   filter?: ModelSubscriptionBoneFilterInput | null;
+  owner?: string | null;
 };
 
 export type OnDeleteBoneSubscription = {

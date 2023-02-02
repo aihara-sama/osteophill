@@ -44,7 +44,7 @@ const Bone: FunctionComponent<IProps> = () => {
           variables: {
             id: router.query.id,
           },
-          authMode: "AWS_IAM",
+          authMode: "API_KEY",
         })) as { data: { getBone: IBone } };
         setBone(result.data.getBone);
       } catch (error) {
@@ -69,7 +69,7 @@ const Bone: FunctionComponent<IProps> = () => {
               id: { ne: router.query.id },
             },
           },
-          authMode: "AWS_IAM",
+          authMode: "API_KEY",
         })) as { data: { listBones: { items: IBone[] } } };
 
         setsimilarBones(result.data.listBones.items);

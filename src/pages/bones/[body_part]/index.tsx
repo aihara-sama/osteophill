@@ -11,7 +11,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import LoadingSpinner from "components/common/LoadingSpinner";
 import { UserLayout } from "components/layouts/UserLayout";
-import { listBones } from "graphql/queries";
+import { searchBones } from "graphql/queries";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
 
   // ~~~~~ Effects ~~~~~
   useEffect(() => {
-    query.body_part && handleGetBones(query.body_part as string, searchText);
+    query.body_part && handleSearchBones(query.body_part as string, searchText);
 
     return () => {
       setBones([]);
@@ -48,22 +48,22 @@ const BodyPart: FunctionComponent<IProps> = () => {
   }, [query.body_part, searchText]);
 
   // ~~~~~ Handlers ~~~~~
-  const handleGetBones = (bodyPart: string, name: string = "") => {
+  const handleSearchBones = (bodyPart: string, name: string = "") => {
     (async () => {
       setIsBonesLoading(true);
       try {
         const result = (await API.graphql({
-          query: listBones,
+          query: searchBones,
           variables: {
             filter: {
               bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
-              name: { contains: name },
+              name: { wildcard: `*${name}*` },
             },
           },
-          authMode: "AWS_IAM",
-        })) as { data: { listBones: { items: IBone[] } } };
+          authMode: "API_KEY",
+        })) as { data: { searchBones: { items: IBone[] } } };
 
-        setBones(result.data.listBones.items);
+        setBones(result.data.searchBones.items);
       } catch (error) {
         toast.error("Something went wrong!");
         console.error(error);
@@ -113,8 +113,8 @@ const BodyPart: FunctionComponent<IProps> = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "space-around",
-                    py: 1,
                     borderRadius: 4,
+                    p: 1,
                   }}
                 >
                   <Typography
