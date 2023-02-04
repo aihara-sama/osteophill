@@ -1,31 +1,25 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-osteophill-dev-181628-authRole",
-      "UnauthRoleArn": "arn:aws:iam::740317745905:role/amplify-osteophill-dev-181628-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::740317745905:role/amplify-osteophill-dev-181628-authRole",
+      "AuthRoleName": "amplify-amplify7240d1e79c534-staging-175247-authRole",
+      "UnauthRoleArn": "arn:aws:iam::740317745905:role/amplify-amplify7240d1e79c534-staging-175247-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::740317745905:role/amplify-amplify7240d1e79c534-staging-175247-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-osteophill-dev-181628-deployment",
-      "UnauthRoleName": "amplify-osteophill-dev-181628-unauthRole",
-      "StackName": "amplify-osteophill-dev-181628",
-      "StackId": "arn:aws:cloudformation:eu-west-1:740317745905:stack/amplify-osteophill-dev-181628/74d84d80-a0b9-11ed-be07-0659a062efbf",
+      "DeploymentBucketName": "amplify-amplify7240d1e79c534-staging-175247-deployment",
+      "UnauthRoleName": "amplify-amplify7240d1e79c534-staging-175247-unauthRole",
+      "StackName": "amplify-amplify7240d1e79c534-staging-175247",
+      "StackId": "arn:aws:cloudformation:eu-west-1:740317745905:stack/amplify-amplify7240d1e79c534-staging-175247/bc6e30c0-a4b4-11ed-bcfe-0a7cd985f02b",
       "AmplifyAppId": "d250x6hbbanb7d"
     },
     "categories": {
+      "auth": {
+        "osteophill": {}
+      },
       "api": {
         "osteophill": {}
       },
-      "auth": {
-        "osteophill8f54cd29": {}
-      },
       "storage": {
         "osteophill": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d250x6hbbanb7d",
-          "type": "cicd"
-        }
       }
     }
   }

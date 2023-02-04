@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { API, graphqlOperation, Storage } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import LoadingSpinner from "components/common/LoadingSpinner";
 import { AdminLayout } from "components/layouts/AdminLayout";
 import { FormikProvider, useFormik } from "formik";
@@ -48,11 +48,13 @@ const CreateBone: FunctionComponent<IProps> = () => {
 
       (async () => {
         try {
-          await API.graphql(
-            graphqlOperation(createBone, {
+          await API.graphql({
+            query: createBone,
+            variables: {
               input: values,
-            })
-          );
+            },
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+          });
           clearForm();
           toast.success("Bone created successfully");
         } catch (error: any) {

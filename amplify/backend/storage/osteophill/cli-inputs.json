@@ -1,9 +1,10 @@
 {
   "resourceName": "osteophill",
-  "policyUUID": "4dd55fc0",
-  "bucketName": "osteophill",
+  "policyUUID": "373b1965",
+  "bucketName": "bones",
   "storageAccess": "authAndGuest",
   "guestAccess": ["READ"],
   "authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
+  "triggerFunction": "NONE",
   "groupAccess": {}
 }

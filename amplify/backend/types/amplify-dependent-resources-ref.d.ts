@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
     };
   };
   auth: {
-    osteophill8f54cd29: {
+    osteophill: {
       AppClientID: "string";
       AppClientIDWeb: "string";
       IdentityPoolId: "string";
