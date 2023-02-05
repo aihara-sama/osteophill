@@ -51,6 +51,9 @@ const StyledSwiper = styled(Swiper)`
     & .swiper-pagination {
       bottom: 0px;
     }
+    & .swiper-wrapper {
+      align-items: center;
+    }
   }
   & .swiper-pagination {
     margin: 0;

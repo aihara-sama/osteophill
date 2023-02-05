@@ -9,13 +9,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import LoadingSpinner from "components/common/LoadingSpinner";
 import { UserLayout } from "components/layouts/UserLayout";
 import { searchBones } from "graphql/queries";
+import throttle from "lodash.throttle";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { IBone } from "types/bone";
 import { kebabCaseToCapitalize } from "utils/kebab-case-to-capitalize";
@@ -36,34 +36,84 @@ const BodyPart: FunctionComponent<IProps> = () => {
   const [searchText, setSearchText] = useState("");
   const [isBonesLoading, setIsBonesLoading] = useState(false);
 
+  // Pagination token
+  const nextTokenRef = useRef(null);
+  const bodyPartRef = useRef<string | undefined>();
+
   // ~~~~~ Refs ~~~~~
 
   // ~~~~~ Effects ~~~~~
   useEffect(() => {
-    query.body_part && handleSearchBones(query.body_part as string, searchText);
-
-    return () => {
-      setBones([]);
-    };
+    query.body_part && handleGetBones(query.body_part as string, searchText);
   }, [query.body_part, searchText]);
 
+  // on page change
+  useEffect(() => {
+    setBones([]);
+    nextTokenRef.current = null;
+  }, [query.body_part]);
+
+  useEffect(() => {
+    const search = throttle(
+      () => {
+        nextTokenRef.current &&
+          handleGetBones(bodyPartRef.current, searchText, nextTokenRef.current);
+      },
+      1000,
+      {
+        trailing: false,
+      }
+    );
+
+    const onScroll = () => {
+      const lastBoneDOMEl = document.querySelector('[data-last_bone="true"]');
+      if (lastBoneDOMEl) {
+        const isLastBoneDOMElInVIewport = isElementInViewport(lastBoneDOMEl);
+
+        if (isLastBoneDOMElInVIewport) search();
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    bodyPartRef.current = query.body_part as string;
+  }, [query.body_part]);
+
   // ~~~~~ Handlers ~~~~~
-  const handleSearchBones = (bodyPart: string, name: string = "") => {
+  const handleGetBones = (
+    bodyPart: string,
+    name: string = "",
+    nextToken: string | null = null
+  ) => {
     (async () => {
       setIsBonesLoading(true);
+
       try {
         const result = (await API.graphql({
           query: searchBones,
           variables: {
+            limit: 30,
+            nextToken,
             filter: {
               bodyPart: { eq: kebabCaseToCapitalize(bodyPart) },
               name: { wildcard: `*${name}*` },
             },
           },
           authMode: "API_KEY",
-        })) as { data: { searchBones: { items: IBone[] } } };
+        })) as { data: { searchBones: { items: IBone[]; nextToken: string } } };
 
-        setBones(result.data.searchBones.items);
+        if (nextToken) {
+          setBones((bones) => [...bones, ...result.data.searchBones.items]);
+        } else {
+          setBones(result.data.searchBones.items);
+        }
+
+        nextTokenRef.current = result.data.searchBones.nextToken;
       } catch (error) {
         toast.error("Something went wrong!");
         console.error(error);
@@ -71,6 +121,18 @@ const BodyPart: FunctionComponent<IProps> = () => {
         setIsBonesLoading(false);
       }
     })();
+  };
+
+  const isElementInViewport = (el: Element) => {
+    const rect = el.getBoundingClientRect();
+
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
   };
 
   return (
@@ -94,47 +156,58 @@ const BodyPart: FunctionComponent<IProps> = () => {
           }}
         />
       </Box>
-      {isBonesLoading && <LoadingSpinner />}
-      {!isBonesLoading && (
-        <Grid mt={3} container spacing={2}>
-          {bones.map((bone, idx) => (
-            <Grid key={idx} item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MuiLink
-                component={Link}
-                href={`/bones/${query.body_part}/${bone.id}`}
-                underline="none"
-                color={"text.secondary"}
-                title={bone.name}
+      <Grid pb={5} mt={3} container spacing={2}>
+        {bones.map((bone, idx) => (
+          <Grid
+            data-last_bone={idx === bones.length - 1}
+            key={idx}
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            lg={2}
+            xl={2}
+          >
+            <MuiLink
+              component={Link}
+              href={`/bones/${query.body_part}/${bone.id}`}
+              underline="none"
+              color={"text.secondary"}
+              title={bone.name}
+              sx={{
+                display: "block",
+                height: "100%",
+              }}
+            >
+              <Box
+                sx={{
+                  border: (theme) => `1px solid ${theme.palette.divider}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  borderRadius: 4,
+                  p: 1,
+                  height: "100%",
+                }}
               >
-                <Box
-                  sx={{
-                    border: (theme) => `1px solid ${theme.palette.divider}`,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    borderRadius: 4,
-                    p: 1,
-                  }}
+                <Typography
+                  textAlign={"center"}
+                  sx={{ textDecoration: "none" }}
                 >
-                  <Typography
-                    textAlign={"center"}
-                    sx={{ textDecoration: "none" }}
-                  >
-                    {bone.name}
-                  </Typography>
-                  <Image
-                    width={84}
-                    height={84}
-                    src={bone.image}
-                    alt={bone.name}
-                  />
-                </Box>
-              </MuiLink>
-            </Grid>
-          ))}
-        </Grid>
-      )}
+                  {bone.name}
+                </Typography>
+                <Image
+                  width={84}
+                  height={84}
+                  src={bone.image}
+                  alt={bone.name}
+                />
+              </Box>
+            </MuiLink>
+          </Grid>
+        ))}
+      </Grid>
       {!bones.length && !isBonesLoading && (
         <Typography color="text.secondary" variant="h3">
           No data

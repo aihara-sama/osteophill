@@ -68,6 +68,7 @@ const Bone: FunctionComponent<IProps> = () => {
               },
               id: { ne: router.query.id },
             },
+            limit: 10,
           },
           authMode: "API_KEY",
         })) as { data: { listBones: { items: IBone[] } } };

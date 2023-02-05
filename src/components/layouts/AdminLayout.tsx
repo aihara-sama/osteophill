@@ -20,7 +20,7 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
     <Authenticator.Provider>
       <Box component="main" height="100%">
         <AdminHeader />
-        <Container component="section" sx={{ height: "calc(100% - 60px)" }}>
+        <Container component="section" sx={{ height: "calc(100% - 100px)" }}>
           {children}
         </Container>
       </Box>

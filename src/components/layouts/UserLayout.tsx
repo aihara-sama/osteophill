@@ -6,7 +6,7 @@ export const UserLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Box component="main" height="100%">
       <UserHeader />
-      <Container component="section" sx={{ height: "calc(100% - 60px)" }}>
+      <Container component="section" sx={{ height: "calc(100% - 100px)" }}>
         {children}
       </Container>
     </Box>
