@@ -35,6 +35,6 @@
     "strictNullChecks": false,
     "target": "es5"
   },
-  "exclude": ["./node_modules/**/*", "cypress/**/*.ts", "*.config.js"],
+  "exclude": ["./node_modules/**/*", "*.config.js"],
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts"]
 }

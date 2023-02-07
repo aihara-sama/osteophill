@@ -10,6 +10,7 @@ import { IBone } from "types/bone";
 const BoneImage: React.FC<BannerImageProps> = ({ bone }) => {
   return (
     <Image
+      data-testid={`swiper-bone-image`}
       alt={bone.name}
       width="150"
       height="150"
@@ -28,6 +29,7 @@ const BoneLink: React.FC<BannerLinkProps> = ({ bone }) => {
 
   return (
     <Box
+      data-testid={`swiper-bone-link`}
       sx={{
         borderRadius: 4,
         border: (theme) => `1px solid ${theme.palette.divider}`,
@@ -35,10 +37,10 @@ const BoneLink: React.FC<BannerLinkProps> = ({ bone }) => {
       }}
       onClick={() => router.push(`/bones/${router.query.body_part}/${bone.id}`)}
     >
-      <Typography mb={1} textAlign="center">
+      <Typography data-testid={`swiper-bone-name`} mb={1} textAlign="center">
         {bone.name}
       </Typography>
-      <BoneImage bone={bone} />;
+      <BoneImage bone={bone} />
     </Box>
   );
 };
@@ -122,7 +124,7 @@ const BonesSwiper: FunctionComponent<IProps> = ({ bones }) => {
         }}
       >
         {bones.map((bone) => (
-          <SwiperSlide key={bone.id}>
+          <SwiperSlide data-testid={`swiper-slide`} key={bone.id}>
             <BoneLink bone={bone} />
           </SwiperSlide>
         ))}

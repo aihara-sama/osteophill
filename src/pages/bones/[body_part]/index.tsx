@@ -138,13 +138,19 @@ const BodyPart: FunctionComponent<IProps> = () => {
   return (
     <UserLayout>
       <Box mt={5}>
-        <Typography variant="h1" color="text.secondary" textAlign={"center"}>
+        <Typography
+          data-testid={`page=title`}
+          variant="h1"
+          color="text.secondary"
+          textAlign={"center"}
+        >
           {kebabCaseToCapitalize(query.body_part as string)} bones
         </Typography>
       </Box>
 
       <Box mt={5} maxWidth={isSmallDown ? "100%" : 300}>
         <TextField
+          data-testid="search-bones"
           fullWidth
           placeholder="Search bones..."
           value={searchText}
@@ -159,6 +165,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
       <Grid pb={5} mt={3} container spacing={2}>
         {bones.map((bone, idx) => (
           <Grid
+            data-testid={`bone-card`}
             data-last_bone={idx === bones.length - 1}
             key={idx}
             item
@@ -169,6 +176,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
             xl={2}
           >
             <MuiLink
+              data-testid={`bone-link`}
               component={Link}
               href={`/bones/${query.body_part}/${bone.id}`}
               underline="none"
@@ -192,12 +200,14 @@ const BodyPart: FunctionComponent<IProps> = () => {
                 }}
               >
                 <Typography
+                  data-testid={`bone-name`}
                   textAlign={"center"}
                   sx={{ textDecoration: "none" }}
                 >
                   {bone.name}
                 </Typography>
                 <Image
+                  data-testid={`bone-image`}
                   width={84}
                   height={84}
                   src={bone.image}
@@ -209,7 +219,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
         ))}
       </Grid>
       {!bones.length && !isBonesLoading && (
-        <Typography color="text.secondary" variant="h3">
+        <Typography data-testid={`no-data`} color="text.secondary" variant="h3">
           No data
         </Typography>
       )}

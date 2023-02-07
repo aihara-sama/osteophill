@@ -30,6 +30,21 @@ const customJestConfig = {
     },
   },
   testEnvironment: "jest-environment-jsdom",
+  moduleFileExtensions: [
+    "ts",
+    "tsx",
+    "js",
+    "mjs",
+    "cjs",
+    "jsx",
+    "json",
+    "node",
+  ],
+  testMatch: [
+    "**/cypress/**/*.[jt]s?(x)",
+    "**/?(*.)+(spec|test|cy).[jt]s?(x)",
+    "cypress/component/**/*.cy.{js,jsx,ts,tsx}",
+  ],
 };
 
 module.exports = createJestConfig(customJestConfig);

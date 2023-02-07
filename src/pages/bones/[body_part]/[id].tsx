@@ -46,7 +46,9 @@ const Bone: FunctionComponent<IProps> = () => {
           },
           authMode: "API_KEY",
         })) as { data: { getBone: IBone } };
-        setBone(result.data.getBone);
+
+        if (result.data.getBone) setBone(result.data.getBone);
+        else router.push(`/bones/${router.query.body_part}`);
       } catch (error) {
         toast.error("Something went wrong!");
         console.error(error);
@@ -76,6 +78,7 @@ const Bone: FunctionComponent<IProps> = () => {
         setsimilarBones(result.data.listBones.items);
       } catch (error) {
         toast.error("Something went wrong!");
+        console.error(error);
       } finally {
       }
     })();
@@ -94,6 +97,7 @@ const Bone: FunctionComponent<IProps> = () => {
             mb={2}
             variant="h2"
             color="text.secondary"
+            data-testid={`page-title`}
           >
             {bone.name}
           </Typography>
@@ -117,19 +121,20 @@ const Bone: FunctionComponent<IProps> = () => {
               }}
             >
               <Image
+                data-testid={`bone-image`}
                 src={bone.image}
                 alt={bone.name}
                 width={300}
                 height={300}
               />
               <Box>
-                <Typography>
+                <Typography data-testid={`bone-category`}>
                   Category:{" "}
                   <Typography fontWeight={600} component={"span"}>
                     {bone.category}
                   </Typography>
                 </Typography>
-                <Typography>
+                <Typography data-testid={`bone-body-part`}>
                   Body part:{" "}
                   <Typography fontWeight={600} component={"span"}>
                     {bone.bodyPart}
@@ -140,8 +145,10 @@ const Bone: FunctionComponent<IProps> = () => {
           </Box>
 
           {!!similarBones.length && (
-            <Box mt={10}>
-              <Typography variant="h4">Similar Bones</Typography>
+            <Box mt={10} data-testid={`similar-bones-container`}>
+              <Typography data-testid={`similar-bones`} variant="h4">
+                Similar bones
+              </Typography>
               <BonesSwiper bones={similarBones} />
             </Box>
           )}
