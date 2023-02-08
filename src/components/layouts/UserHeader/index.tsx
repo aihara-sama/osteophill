@@ -1,10 +1,8 @@
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Hidden, IconButton, Link as MuiLink } from "@mui/material";
-import { LanguageToggle } from "components/common/LanguageToggle";
 import { Logo } from "components/common/Logo";
 import MobileNavbarDrawer from "components/common/MobileNavbarDrawer";
-import { ThemeToggle } from "components/common/ThemeToggle";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -35,13 +33,12 @@ export const UserHeader = () => {
         bgcolor: "background.default",
       }}
     >
-      <Link href="/">
-        <Logo />
-      </Link>
+      <Logo />
       <Hidden smDown>
         <Box display={"flex"} gap={3}>
           {menu.map(({ title, href }, idx) => (
             <MuiLink
+              data-testid={`link-${title}`}
               color={"text.primary"}
               href={href}
               component={Link}
@@ -60,10 +57,9 @@ export const UserHeader = () => {
       </Hidden>
 
       <Box>
-        <LanguageToggle />
-        <ThemeToggle />
         <Hidden smUp>
           <IconButton
+            data-testid={`toggle-mobile-header-drawer`}
             sx={{ px: 0 }}
             onClick={() => setIsMobileNavbarDrawerOpen((prev) => !prev)}
           >

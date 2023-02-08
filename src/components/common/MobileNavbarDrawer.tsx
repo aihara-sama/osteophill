@@ -42,7 +42,7 @@ const MobileNavbarDrawer: FunctionComponent<IProps> = ({
         ModalProps={{
           keepMounted: true,
         }}
-        data-testid="drawer__container"
+        data-testid="mobile-header-drawer"
         PaperProps={{
           sx: {
             width: { xs: "100%", sm: "390px" },
@@ -53,16 +53,19 @@ const MobileNavbarDrawer: FunctionComponent<IProps> = ({
         }}
       >
         <Box py={4} display="flex" justifyContent="space-between">
-          <Link href="/">
-            <Logo />
-          </Link>
+          <Logo />
           <Box display="flex" justifyContent="end">
-            <Close sx={{ cursor: "pointer" }} onClick={handleClose} />
+            <Close
+              data-testid={`close-mobile-header-drawer`}
+              sx={{ cursor: "pointer" }}
+              onClick={handleClose}
+            />
           </Box>
         </Box>
         <Box display={"flex"} gap={3} flexDirection="column">
           {menu.map(({ title, href }, idx) => (
             <MuiLink
+              data-testid={`link-${title}`}
               color={"text.primary"}
               href={href}
               component={Link}

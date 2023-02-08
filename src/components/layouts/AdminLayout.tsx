@@ -7,7 +7,11 @@ import { AdminHeader } from "./AdminHeader";
 
 export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
-  const { route } = useAuthenticator((context) => [context.route]);
+  const { route, ...rest } = useAuthenticator((context) => [context.route]);
+  console.log({
+    route,
+    rest,
+  });
 
   // Auth check
   useEffect(() => {

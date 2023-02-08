@@ -124,8 +124,9 @@ const CreateBone: FunctionComponent<IProps> = () => {
     <FormikProvider value={createBoneFormik}>
       <AdminLayout>
         <Box mt={4} maxWidth={400}>
-          <Typography variant="h2">Create Bone</Typography>
+          <Typography variant="h2">Create bone</Typography>
           <TextField
+            data-testid={`inp-bone-name`}
             {...createBoneFormik.getFieldProps("name")}
             {...getErrorProps(createBoneFormik, "name")}
             fullWidth
@@ -145,6 +146,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
           <FormControl sx={{ mt: 2 }} fullWidth>
             <InputLabel>Body part</InputLabel>
             <Select
+              data-testid={`select-body-part`}
               name="category"
               value={createBoneFormik.values.bodyPart}
               label="Body part"
@@ -153,7 +155,11 @@ const CreateBone: FunctionComponent<IProps> = () => {
               }}
             >
               {Object.values(BoneBodyPart).map((val, idx) => (
-                <MenuItem value={val} key={idx}>
+                <MenuItem
+                  data-testid={`menu-item-${val}`}
+                  value={val}
+                  key={idx}
+                >
                   {val}
                 </MenuItem>
               ))}
@@ -162,6 +168,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
           <FormControl sx={{ mt: 2 }} fullWidth>
             <InputLabel>Bone category</InputLabel>
             <Select
+              data-testid={`select-bone-category`}
               name="category"
               value={createBoneFormik.values.category}
               label="Bone category"
@@ -170,13 +177,17 @@ const CreateBone: FunctionComponent<IProps> = () => {
               }}
             >
               {Object.values(BoneCategory).map((val, idx) => (
-                <MenuItem value={val} key={idx}>
+                <MenuItem
+                  data-testid={`menu-item-${val}`}
+                  value={val}
+                  key={idx}
+                >
                   {val}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <Box>
+          <Box data-testid={`bone-image-container`}>
             <Box
               mt={2}
               component={"label"}
@@ -214,7 +225,11 @@ const CreateBone: FunctionComponent<IProps> = () => {
                       "Select image")}
                 </Typography>
               </Box>
-              <input type={"file"} onChange={handlUploadBoneImage} />
+              <input
+                data-testid={`inp-upload-bone-image`}
+                type={"file"}
+                onChange={handlUploadBoneImage}
+              />
             </Box>
             {createBoneFormik.touched["image"] &&
               createBoneFormik.errors.image && (
@@ -225,6 +240,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
           </Box>
           <Box mt={2}>
             <Button
+              data-testid={`submit-create-bone`}
               sx={{
                 py: 1,
                 fontSize: 16,

@@ -1,5 +1,6 @@
 import AllProviders from "@/cypress/utils/AllProviders";
 import { API } from "@aws-amplify/api";
+import { menu } from "components/layouts/UserHeader/menu";
 import Bone from "pages/bones/[body_part]/[id]";
 import { IBone } from "types/bone";
 
@@ -218,6 +219,74 @@ describe("Bone", () => {
 
     it("should render loading spinner", () => {
       cy.getByTestId("loading-spinner");
+    });
+  });
+
+  context("User header", () => {
+    beforeEach(() => {
+      cy.get<IBone[]>("@bones").then((bones) => {
+        const headBones = bones.filter((bone) => bone.bodyPart === "Head");
+
+        cy.stub(API, "graphql").resolves({
+          data: {
+            listBones: {
+              items: [headBones[1]],
+            },
+            getBone: headBones[0],
+          },
+        });
+
+        cy.mount(
+          <AllProviders
+            router={{
+              pathname: `/bones/head/${headBones[0].id}`,
+              query: {
+                body_part: "head",
+                id: headBones[0].id,
+              },
+            }}
+          >
+            <Bone />
+          </AllProviders>
+        );
+      });
+    });
+
+    it("should render logo", () => {
+      cy.getByTestId("logo").should("have.attr", "href").and("eq", "/");
+    });
+
+    it("should render nav items", () => {
+      menu.forEach(({ title }) => {
+        cy.getByTestId(`link-${title}`).contains(title);
+      });
+    });
+
+    context("Mobile drawer", () => {
+      beforeEach(() => {
+        cy.viewport(599, 599);
+      });
+
+      it("Should render logo", () => {
+        cy.getByTestId("toggle-mobile-header-drawer").click();
+        cy.getByTestId("logo").should("have.attr", "href").and("eq", "/");
+      });
+
+      it("should render nav items", () => {
+        cy.getByTestId("toggle-mobile-header-drawer").click();
+
+        menu.forEach(({ title }) => {
+          cy.getByTestId(`link-${title}`).contains(title);
+        });
+      });
+
+      it("should toggle mobile haeder drawer", () => {
+        cy.getByTestId("mobile-header-drawer").should("not.be.visible");
+        cy.getByTestId("toggle-mobile-header-drawer").click();
+        cy.getByTestId("mobile-header-drawer").should("be.visible");
+        cy.getByTestId("close-mobile-header-drawer").click();
+        cy.getByTestId("mobile-header-drawer").should("not.be.visible");
+      });
     });
   });
 });

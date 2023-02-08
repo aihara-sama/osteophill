@@ -5,6 +5,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import { CssBaseline } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { Amplify } from "aws-amplify";
 import { ThemeProvider } from "contexts/theme";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import type { NextRouter } from "next/router";
@@ -14,8 +15,10 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Store, store } from "store";
+import awsConfigs from "../../src/aws-exports";
 import { createMockRouter } from "../../__mocks__/next/router";
 
+Amplify.configure(awsConfigs);
 type AllProvidersProps = {
   children: JSX.Element;
   router: Partial<NextRouter>;
