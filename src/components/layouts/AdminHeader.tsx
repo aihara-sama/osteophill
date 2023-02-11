@@ -3,17 +3,13 @@ import "@aws-amplify/ui-react/styles.css";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Button, Hidden, IconButton } from "@mui/material";
-import { LanguageToggle } from "components/common/LanguageToggle";
 import { Logo } from "components/common/Logo";
 import MobileNavbarDrawer from "components/common/MobileNavbarDrawer";
-import { ThemeToggle } from "components/common/ThemeToggle";
-import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useState } from "react";
 
 export const AdminHeader = () => {
   const { signOut } = useAuthenticator((context) => [context.route]);
-  const { t } = useTranslation("common");
 
   const [isMobileNavbarDrawerOpen, setIsMobileNavbarDrawerOpen] =
     useState<boolean>(false);
@@ -40,10 +36,8 @@ export const AdminHeader = () => {
         <Logo />
       </Link>
       <Box>
-        <LanguageToggle />
-        <ThemeToggle />
         <Button variant="text" onClick={signOut}>
-          {t("Logout")}
+          Logout
         </Button>
 
         <Hidden smUp>

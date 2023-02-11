@@ -3,7 +3,6 @@ import type { Store as ReduxStore } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { appSlice } from "slices/app.slice";
-import { authSlice } from "slices/auth.slice";
 
 export const store = configureStore({
   reducer: persistReducer(
@@ -13,7 +12,6 @@ export const store = configureStore({
     },
     combineReducers({
       app: appSlice.reducer,
-      auth: authSlice.reducer,
     })
   ),
   middleware: (getDefaultMiddleware) =>

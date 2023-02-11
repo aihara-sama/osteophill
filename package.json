@@ -19,8 +19,7 @@
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
-    "prepare": "husky install",
-    "postbuild": "next-sitemap"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^4.3.5",
@@ -37,16 +36,13 @@
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
-    "i18next": "^22.4.5",
     "next": "^13.0.6",
-    "next-i18next": "^13.0.2",
     "next-seo": "^5.14.1",
     "next-sitemap": "^3.1.32",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
-    "react-i18next": "^12.1.1",
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",

@@ -7,7 +7,6 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { Meta } from "components/common/Meta";
 import { Toaster } from "components/common/Toaster";
 import { ThemeProvider } from "contexts/theme";
-import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Router } from "next/router";
@@ -57,4 +56,4 @@ function MyApp(props: MyAppProps) {
   );
 }
 
-export default appWithTranslation(MyApp);
+export default MyApp;

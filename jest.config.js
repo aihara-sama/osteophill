@@ -10,7 +10,6 @@ const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["/node_modules/"],
   moduleNameMapper: {
-    // Handle module aliases (this will be automatically configured for you soon)
     "^components/(.*)$": "<rootDir>/src/components/$1",
     "^theme/(.*)$": "<rootDir>/src/theme/$1",
     "^slices/(.*)$": "<rootDir>/src/slices/$1",
