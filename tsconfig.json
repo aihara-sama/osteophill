@@ -23,8 +23,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@/*": ["../*"],
-      "@/public/*": ["../public/*"]
+      "*": ["./*"]
     },
     "preserveConstEnums": true,
     "removeComments": true,
@@ -35,6 +34,6 @@
     "strictNullChecks": false,
     "target": "es5"
   },
-  "exclude": ["./node_modules/**/*", "*.config.js"],
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts"]
+  "exclude": ["node_modules", "cypress"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

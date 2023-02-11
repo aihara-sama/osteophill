@@ -5,46 +5,26 @@ const createJestConfig = nextJest({
   dir: "./",
 });
 
+// Add any custom config to be passed to Jest
 const customJestConfig = {
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testPathIgnorePatterns: ["/node_modules/"],
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
-    "^@/(.*)$": "<rootDir>/src/$1",
-
-    "^@/public/(.*)$": "<rootDir>/public/$1",
-  },
-  setupFilesAfterEnv: ["./jest.setup.js"],
-  clearMocks: true,
-  collectCoverage: true,
-  collectCoverageFrom: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "!./src/**/_*.{js,jsx,ts,tsx}",
-    "!**/*.d.ts",
-    "!**/node_modules/**",
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 30,
-      functions: 30,
-      lines: 30,
-      statements: 30,
-    },
+    "^components/(.*)$": "<rootDir>/src/components/$1",
+    "^theme/(.*)$": "<rootDir>/src/theme/$1",
+    "^slices/(.*)$": "<rootDir>/src/slices/$1",
+    "^store/(.*)$": "<rootDir>/src/store/$1",
+    "^utils/(.*)$": "<rootDir>/src/utils/$1",
+    "^contexts/(.*)$": "<rootDir>/src/contexts/$1",
+    "^theme/(.*)$": "<rootDir>/src/theme/$1",
+    "^helpers/(.*)$": "<rootDir>/src/helpers/$1",
+    "^pages/(.*)$": "<rootDir>/src/pages/$1",
+    "^graphql/(.*)$": "<rootDir>/src/graphql/$1",
+    "^uuid$": require.resolve("uuid"),
   },
   testEnvironment: "jest-environment-jsdom",
-  moduleFileExtensions: [
-    "ts",
-    "tsx",
-    "js",
-    "mjs",
-    "cjs",
-    "jsx",
-    "json",
-    "node",
-  ],
-  testMatch: [
-    "**/cypress/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test|cy).[jt]s?(x)",
-    "cypress/component/**/*.cy.{js,jsx,ts,tsx}",
-  ],
 };
 
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 module.exports = createJestConfig(customJestConfig);

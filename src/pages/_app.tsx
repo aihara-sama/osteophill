@@ -1,6 +1,3 @@
-import "@/node_modules/swiper/modules/pagination/pagination.scss";
-import "@/node_modules/swiper/swiper-bundle.min.css";
-import "@/node_modules/swiper/swiper.min.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import type { EmotionCache } from "@emotion/react";
 import { CacheProvider } from "@emotion/react";
@@ -15,10 +12,10 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Router } from "next/router";
 import nProgress from "nprogress";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "store";
 import createEmotionCache from "utils/createEmotionCache";
+import "/node_modules/swiper/modules/pagination/pagination.scss";
+import "/node_modules/swiper/swiper-bundle.min.css";
+import "/node_modules/swiper/swiper.min.css";
 
 import { Amplify } from "aws-amplify";
 
@@ -47,21 +44,15 @@ function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Meta />
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          {() => (
-            <ThemeProvider>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Authenticator.Provider>
-                  <CssBaseline />
-                  <Toaster />
-                  <Component {...pageProps} />
-                </Authenticator.Provider>
-              </LocalizationProvider>
-            </ThemeProvider>
-          )}
-        </PersistGate>
-      </Provider>
+      <ThemeProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Authenticator.Provider>
+            <CssBaseline />
+            <Toaster />
+            <Component {...pageProps} />
+          </Authenticator.Provider>
+        </LocalizationProvider>
+      </ThemeProvider>
     </CacheProvider>
   );
 }

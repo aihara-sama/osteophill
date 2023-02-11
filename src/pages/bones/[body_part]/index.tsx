@@ -139,7 +139,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
     <UserLayout>
       <Box mt={5}>
         <Typography
-          data-testid={`page=title`}
+          data-testid={`page-title`}
           variant="h1"
           color="text.secondary"
           textAlign={"center"}

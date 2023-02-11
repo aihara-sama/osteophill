@@ -1,6 +1,6 @@
 projects:
   osteophill:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/osteophill/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:
