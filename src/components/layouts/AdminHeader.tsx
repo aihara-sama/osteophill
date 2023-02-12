@@ -5,7 +5,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Button, Hidden, IconButton } from "@mui/material";
 import { Logo } from "components/common/Logo";
 import MobileNavbarDrawer from "components/common/MobileNavbarDrawer";
-import Link from "next/link";
 import { useState } from "react";
 
 export const AdminHeader = () => {
@@ -32,9 +31,7 @@ export const AdminHeader = () => {
         bgcolor: "background.default",
       }}
     >
-      <Link href="/">
-        <Logo />
-      </Link>
+      <Logo />
       <Box>
         <Button variant="text" onClick={signOut}>
           Logout

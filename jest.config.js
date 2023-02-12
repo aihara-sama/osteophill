@@ -8,9 +8,11 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  testPathIgnorePatterns: ["/node_modules/"],
+  testPathIgnorePatterns: ["node_modules"],
   moduleNameMapper: {
     "^components/(.*)$": "<rootDir>/src/components/$1",
+    "^data/(.*)$": "<rootDir>/src/data/$1",
+    "^types/(.*)$": "<rootDir>/src/types/$1",
     "^theme/(.*)$": "<rootDir>/src/theme/$1",
     "^slices/(.*)$": "<rootDir>/src/slices/$1",
     "^store/(.*)$": "<rootDir>/src/store/$1",
@@ -23,6 +25,10 @@ const customJestConfig = {
     "^uuid$": require.resolve("uuid"),
   },
   testEnvironment: "jest-environment-jsdom",
+  moduleDirectories: ["node_modules", "utils"],
+  transform: {
+    "^.+\\.(js|ts)$": "ts-jest",
+  },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

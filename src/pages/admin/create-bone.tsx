@@ -124,7 +124,9 @@ const CreateBone: FunctionComponent<IProps> = () => {
     <FormikProvider value={createBoneFormik}>
       <AdminLayout>
         <Box mt={4} maxWidth={400}>
-          <Typography variant="h2">Create bone</Typography>
+          <Typography variant="h2" data-testid={`page-title`}>
+            Create bone
+          </Typography>
           <TextField
             data-testid={`inp-bone-name`}
             {...createBoneFormik.getFieldProps("name")}
