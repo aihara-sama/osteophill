@@ -48,4 +48,5 @@ module.exports = async () => ({
    * @link https://jestjs.io/docs/ecmascript-modules
    */
   transformIgnorePatterns: ["node_modules/(?!(swiper|ssr-window|dom7)/)"],
+  verbose: true,
 });

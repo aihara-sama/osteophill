@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "osteophill",
+    "identityPoolName": "osteophill42f04260_identitypool_42f04260",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "osteop5c171905",
-    "userPoolName": "osteophill",
+    "resourceNameTruncated": "osteop42f04260",
+    "userPoolName": "osteophill42f04260_userpool_42f04260",
     "autoVerifiedAttributes": ["email"],
     "mfaConfiguration": "OFF",
     "mfaTypes": ["SMS Text Message"],
@@ -21,20 +21,23 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": ["email"],
     "userpoolClientReadAttributes": ["email"],
-    "userpoolClientLambdaRole": "osteop5c171905_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "osteop42f04260_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "5c171905",
-    "resourceName": "osteophill",
+    "sharedId": "42f04260",
+    "resourceName": "osteophill42f04260",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
-    "thirdPartyAuth": false,
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": {},
-    "hostedUI": false,
+    "useDefault": "default",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": ["AuthRole", "Arn"]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": ["UnauthRole", "Arn"]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": []
   }
 }

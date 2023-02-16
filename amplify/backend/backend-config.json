@@ -5,7 +5,7 @@
         {
           "attributes": ["UserPoolId"],
           "category": "auth",
-          "resourceName": "osteophill"
+          "resourceName": "osteophill42f04260"
         }
       ],
       "output": {
@@ -14,7 +14,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authosteophill"
+                "userPoolId": "authosteophill42f04260"
               }
             }
           ],
@@ -31,7 +31,7 @@
     }
   },
   "auth": {
-    "osteophill": {
+    "osteophill42f04260": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -51,7 +51,7 @@
     }
   },
   "storage": {
-    "osteophill": {
+    "bones": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

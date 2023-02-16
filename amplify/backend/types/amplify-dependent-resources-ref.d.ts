@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
     };
   };
   auth: {
-    osteophill: {
+    osteophill42f04260: {
       AppClientID: "string";
       AppClientIDWeb: "string";
       IdentityPoolId: "string";
@@ -18,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     };
   };
   storage: {
-    osteophill: {
+    bones: {
       BucketName: "string";
       Region: "string";
     };

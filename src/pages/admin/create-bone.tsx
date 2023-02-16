@@ -55,10 +55,12 @@ const CreateBone: FunctionComponent<IProps> = () => {
             },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
+
           clearForm();
           toast.success("Bone created successfully");
         } catch (error: any) {
           toast.error(error.toString());
+          console.error(error);
         } finally {
           setIsBoneCreating(false);
         }
@@ -82,7 +84,6 @@ const CreateBone: FunctionComponent<IProps> = () => {
       const file = fileList[0];
       if (file) {
         (async () => {
-          setBoneImageName(file.name);
           setIsBoneImageUploading(true);
           try {
             const { key } = await Storage.put(file.name, file);
@@ -92,8 +93,10 @@ const CreateBone: FunctionComponent<IProps> = () => {
             );
           } catch (error: any) {
             toast.error(error.toString());
+            console.error(error);
           } finally {
             setIsBoneImageUploading(false);
+            setBoneImageName(file.name);
           }
         })();
       }
@@ -217,6 +220,7 @@ const CreateBone: FunctionComponent<IProps> = () => {
                   <LoadingSpinner height={32} width={32} />
                 )}
                 <Typography
+                  data-testid={`select-image`}
                   {...(createBoneFormik.touched["image"] &&
                     createBoneFormik.errors.image && { color: "error" })}
                 >
@@ -235,7 +239,11 @@ const CreateBone: FunctionComponent<IProps> = () => {
             </Box>
             {createBoneFormik.touched["image"] &&
               createBoneFormik.errors.image && (
-                <Typography fontSize={"small"} color="error">
+                <Typography
+                  data-testid={`bone-image-error`}
+                  fontSize={"small"}
+                  color="error"
+                >
                   {createBoneFormik.errors.image}
                 </Typography>
               )}
