@@ -1,12 +1,9 @@
 import { API } from "@aws-amplify/api";
-import ClearIcon from "@mui/icons-material/Clear";
 import {
   Box,
   Grid,
-  Link as MuiLink,
-  TextField,
-  Typography,
-  useMediaQuery,
+  Link as MuiLink, Typography,
+  useMediaQuery
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { UserLayout } from "components/layouts/UserLayout";
@@ -148,7 +145,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
         </Typography>
       </Box>
 
-      <Box mt={5} maxWidth={isSmallDown ? "100%" : 300}>
+      {/* <Box mt={5} maxWidth={isSmallDown ? "100%" : 300}>
         <TextField
           data-testid="search-bones"
           fullWidth
@@ -161,7 +158,7 @@ const BodyPart: FunctionComponent<IProps> = () => {
             ),
           }}
         />
-      </Box>
+      </Box> */}
       <Grid pb={5} mt={3} container spacing={2}>
         {bones.map((bone, idx) => (
           <Grid
