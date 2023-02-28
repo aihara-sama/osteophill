@@ -23,14 +23,14 @@ const BodyPart: FunctionComponent<IProps> = () => {
   // ~~~~~ Redux state ~~~~~
 
   // ~~~~~ Hooks ~~~~~
-  const theme = useTheme();
-  const isSmallDown = useMediaQuery(theme.breakpoints.down("sm"));
+//   const theme = useTheme();
+//   const isSmallDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   // ~~~~~ Cmp state ~~~~~
   const { query } = useRouter();
   const [bones, setBones] = useState<IBone[]>([]);
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText] = useState("");
   const [isBonesLoading, setIsBonesLoading] = useState(false);
 
   // Pagination token
