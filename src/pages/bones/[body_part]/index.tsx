@@ -2,10 +2,8 @@ import { API } from "@aws-amplify/api";
 import {
   Box,
   Grid,
-  Link as MuiLink, Typography,
-  useMediaQuery
+  Link as MuiLink, Typography
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { UserLayout } from "components/layouts/UserLayout";
 import { searchBones } from "graphql/queries";
 import throttle from "lodash.throttle";
